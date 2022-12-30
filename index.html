@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@100;200;300;400;500;600;700;800;900&display=swap">
+    <title>Django framework technical documentation</title>
+  </head>
+  
+  <body>
+    
+    <nav id="navbar">
+      <header id="nav-header">Django Framework - Technical Documentation</header>
+      
+      <a href="#introduction" class="nav-link"><span>Introduction</span></a>
+      <a href="#installation" class="nav-link"><span>Installation</span></a>
+      <a href="#creating_a_project" class="nav-link"><span>Creating a project</span></a>
+      <a href="#creating_an_app" class="nav-link"><span>Creating an app</span></a>
+      <a href="#configuring_the_database" class="nav-link"><span>Configuring the database</span></a>
+      <a href="#defining_models" class="nav-link"><span>Defining models</span></a>
+      <a href="#running_migrations" class="nav-link"><span>Running migrations</span></a>
+      <a href="#defining_views" class="nav-link"><span>Defining views</span></a>
+      <a href="#url_mapping" class="nav-link"><span>URL mapping</span></a>
+      <a href="#templates" class="nav-link"><span>Templates</span></a>
+    </nav>
+
+    <main id="main-doc">
+      <section class="main-section" id="introduction">
+        <header>Introduction</header>
+        <p class="indent">Django is an open-source framework for web application development based on Python. It provides a range of tools and features that simplify the process of developing a web application, such as support for URL mapping, the model-view-template pattern, support for databases, and much more.</p>
+        <pre class="indent"><code># Import the Django framework
+import django
+            
+# Print the version of Django
+print(django.get_version())</code></pre>
+        <ul class="indent">
+          <li>Import the Django framework</li>
+          <li>Print the version of Django</li>
+        </ul>
+      </section>
+      <section class="main-section" id="installation">
+        <header>Installation</header>
+        <p class="indent">To use Django, you must first install Python on your computer. Once Python is installed, you can install Django using the "pip" package manager.</p>
+        <pre class="indent"><code># Install Django using pip
+!pip install django</code></pre>
+        <ul class="indent">
+          <li>Install Django using pip</li>
+        </ul>
+      </section>
+      <section class="main-section" id="creating_a_project">
+        <header>Creating a project</header>
+        <p class="indent">Once Django is installed, you can create a new project using the command "django-admin startproject project_name". This command will create the basic structure of the project, which includes the configuration files and the folder for the applications.</p>
+        <pre class="indent"><code># Create a new Django project called "myproject"
+!django-admin startproject myproject</code></pre>
+        <ul class="indent">
+          <li>Create a new Django project using the "django-admin startproject" command</li>
+        </ul>
+      </section>
+      <section class="main-section" id="creating_an_app">
+        <header>Creating an app</header>
+        <p class="indent">Once the project is created, you can create an app within the project using the command "python manage.py startapp app_name". This command will create the basic structure for the app, which includes the configuration files and the folder for the models (Django models represent database tables).</p>
+        <pre class="indent"><code># Go to the project directory
+cd myproject
+
+# Create a new Django app called "myapp"
+!python manage.py startapp myapp</code></pre>
+        <ul class="indent">
+          <li>Go to the project directory</li>
+          <li>Create a new Django app using the "python manage.py startapp" command</li>
+        </ul>
+      </section>
+      <section class="main-section" id="configuring_the_database">
+        <header>Configuring the database</header>
+        <p class="indent">Django supports many types of databases, such as MySQL, PostgreSQL, and SQLite. To configure the database for the app, you need to modify the "settings.py" file of the project and set the database variables.</p>
+        <pre class="indent"><code># In the "settings.py" file of the project, set the database variables
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}</code></pre>
+        <ul class="indent">
+          <li>In the "settings.py" file of the project, set the database variables</li>
+        </ul>
+      </section>
+      <section class="main-section" id="defining_models">
+        <header>Defining models</header>
+        <p class="indent">Models are used by Django to represent database tables. To define a model, you need to create a class that inherits from "models.Model" and define the fields of the model as class variables.</p>
+        <pre class="indent"><code># In the "models.py" file of the app, define a model called "Person"
+from django.db import models
+
+class Person(models.Model):
+    name = models.CharField(max_length=100)
+    age = models.IntegerField()</code></pre>
+        <ul class="indent">
+          <li>In the "models.py" file of the app, define a model class that inherits from "models.Model"</li>
+          <li>Define the fields of the model as class variables</li>
+        </ul>
+      </section>
+      <section class="main-section" id="running_migrations">
+        <header>Running migrations</header>
+        <p class="indent">Once the model classes are defined, you need to run migrations to create the database tables. To do this, you need to use the command "python manage.py makemigrations" to create the migrations and then "python manage.py migrate" to apply them to the database.</p>
+        <pre class="indent"><code># Create the migrations for the app
+!python manage.py makemigrations myapp
+
+# Apply the migrations to the database
+!python manage.py migrate</code></pre>
+        <ul class="indent">
+          <li>Create the migrations for the app using the "python manage.py makemigrations" command</li>
+          <li>Apply the migrations to the database using the "python manage.py migrate" command</li>
+        </ul>
+      </section>
+      <section class="main-section" id="defining_views">
+        <header>Defining views</header>
+        <p class="indent">Views are functions that handle HTTP requests and return responses. To define a view, you need to create a function that accepts an HTTP request and returns a response.</p>
+        <pre class="indent"><code># In the "views.py" file of the app, define a view called "home"
+from django.shortcuts import render
+
+def home(request):
+    return render(request, 'home.html')</code></pre>
+        <ul class="indent">
+          <li>In the "views.py" file of the app, define a view function</li>
+        </ul>
+      </section>
+      <section class="main-section" id="url_mapping">
+        <header>URL mapping</header>
+        <p class="indent">To associate a view with a specific URL, you need to define a URL pattern in the "urls.py" file of the app. The URL pattern specifies the regular expression that the URL should match and the view function that should be called.</p>
+        <pre class="indent"><code># In the "urls.py" file of the app, define a URL pattern for the "home" view
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.home, name='home'),
+]</code></pre>
+        <ul class="indent">
+          <li>In the "urls.py" file of the app, define a URL pattern for the view function</li>
+        </ul>
+      </section>
+      <section class="main-section" id="templates">
+        <header>Templates</header>
+        <p class="indent">Django uses templates to define the HTML structure of a webpage. You can create a template and use it to render the HTML of a view function by using the "render()" function.</p>
+        <pre class="indent"><code># In the "templates" folder of the app, create a file called "home.html"
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Home&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Welcome to the home page!&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+# In the "views.py" file of the app, render the "home.html" template in the "home" view
+from django.shortcuts import render
+
+def home(request):
+    return render(request, 'home.html')</code></pre>
+        <ul class="indent">
+          <li>In the "templates" folder of the app, create a template file</li>
+          <li>In the view function, use the "render()" function to render the template and return it as the response to an HTTP request</li>
+        </ul>
+      </section>
+    </main>
+    
+  </body>
+  
+</html>
